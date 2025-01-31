@@ -1,90 +1,117 @@
 #include <stdio.h>
-
-// Desafio Super Trunfo - Países
-// Tema 2 - Comparação das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de comparação de cartas de cidades. 
-// Siga os comentários para implementar cada parte do desafio.
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
+   
     printf("Desafio Super Trunfo - Países\n");
     printf("\n**************************\n");
+    
+     int codigo, iniciar;
+    float area, pib, DensidadePopulacional, PibPercapita, populacao, total;
+    
+     printf ("1-iniciar o jogo\n");
+    printf ("2-Regras do jogo\n");
+    printf ("3-sair\n");
+    scanf ("%d",&iniciar);
+    
+    switch (iniciar){
+    
+    case 1:
+    
+     // Entrada para a primeira carta
+    printf("Adicione o código da carta: \n");
+    scanf("%d", &codigo);
 
-    int codigoDaCarta1, codigoDaCarta2, populacao1, populacao2;
-    char nome1[50], nome2[50];
-    float area1, area2, pib1, pib2, DensidadePopulacional1, DensidadePopulacional2, PibPercapita1, PibPercapita2;
-
-    // Entrada para a primeira carta
-    printf("Adicione o código da carta 1: \n");
-    scanf("%d", &codigoDaCarta1);
-
-    printf("Adicione o nome da cidade 1: \n");
-    scanf("%s", nome1);
 
     printf("Digite a área territorial (em KM²) da cidade 1: \n");
-    scanf("%f", &area1);
+    scanf("%f", &area);
 
     printf("Digite o PIB da cidade 1: \n");
-    scanf("%f", &pib1);
+    scanf("%f", &pib);
 
-    printf("Digite a população da cidade 1: \n");
-    scanf("%d", &populacao1);
+    printf("Digite a população da cidade: \n");
+    scanf("%f", &populacao);
 
-    // Entrada para a segunda carta
+    
+       // Cálculos
+    DensidadePopulacional = populacao / area;
+    PibPercapita = pib / populacao*100;
+    
+    srand (time(0));
+    // Geração de valores aleatórios para a população, área e PIB
+    float populacao2 = rand() % 100000 + 100; 
+    float area2 = rand() % 100000 + 100;  
+    float pib2 = rand() % 100000 + 100;  
+    // Cálculo da Densidade Populacional
+   float  densidadePopulacional2 = populacao2 / area2;
+    
+    // Cálculo do PIB per capita
+  float   pibPercapita2 = pib2 / populacao2 *100;
+    
+    printf("********************************\n");
+    
+    printf ("**Carta 1**\n");
+    printf  ("Populacao %.2f:\n", populacao);
+    printf ("Area: %.2f\n", area);
+    printf ("PIB %.2f\n", pib);
+    printf ("Densidade populacional %.2f\n", DensidadePopulacional);
+    printf ("Pib Percapita %.1f %\n",PibPercapita);
+    printf ("                     \n");
+    printf ("**Carta 2**\n");
+ 
+    printf ("Populacao: %d\n",populacao2);
+    printf ("Area: %.2f\n ",area2);
+    printf ("Pib: %.2f\n", pib2);
+    printf ( "Densidade populacional %.2f\n", densidadePopulacional2);
+    printf ("Pib Percapita: %.1f %\n ",pibPercapita2);
+    printf ("*******************************\n");
+    
+    float resultado = DensidadePopulacional > densidadePopulacional2 ? 1:0;
+    float resultado2 = PibPercapita < pibPercapita2 ? 1:0;
+    
+    if (resultado == 1 && resultado2 == 1 ){
+        printf ("Parabéns você ganhou\n");
+    } else{
+        printf ("Que pena você perdeu\n");
+    }  if (DensidadePopulacional == densidadePopulacional2 && PibPercapita == pibPercapita2) {
 
-     printf("\n*******************\n");
+        printf ("Caramba!!! Empate...\n");
+    }
+    
 
-    printf("Adicione o código da carta 2: \n");
-    scanf("%d", &codigoDaCarta2);
-
-    printf("Adicione o nome da cidade 2: \n");
-    scanf("%s", nome2);
-
-    printf("Digite a área territorial (em KM²) da cidade 2: \n");
-    scanf("%f", &area2);
-
-    printf("Digite o PIB da cidade 2: \n");
-    scanf("%f", &pib2);
-
-    printf("Digite a população da cidade 2: \n");
-    scanf("%d", &populacao2);
-
-    // Cálculos
-    DensidadePopulacional1 = populacao1 / area1;
-    PibPercapita1 = pib1 / populacao1;
-
-    DensidadePopulacional2 = populacao2 / area2;
-    PibPercapita2 = pib2 / populacao2; 
-
-
-    // Exibindo as informações da primeira carta
-    printf("\n----- Informações da primeira carta -----\n");
-    printf("Código da carta 1: %d\n", codigoDaCarta1);
-    printf("Cidade: %s\n", nome1);
-    printf("Área Territorial: %.2f KM²\n", area1);
-    printf("PIB: %.2f\n", pib1);
-    printf("População: %d\n", populacao1);
-    printf("Densidade Populacional: %.2f habitantes por KM²\n", DensidadePopulacional1);
-    printf("PIB Per Capita: %.2f\n", PibPercapita1);
-
-    // Exibindo as informações da segunda carta
-    printf("\n----- Informações da segunda carta -----\n");
-    printf("Código da carta 2: %d\n", codigoDaCarta2);
-    printf("Cidade: %s\n", nome2);
-    printf("Área Territorial: %.2f KM²\n", area2);
-    printf("PIB: %.2f\n", pib2);
-    printf("População: %d\n", populacao2);
-    printf("Densidade Populacional: %.2f habitantes por KM²\n", DensidadePopulacional2);
-    printf("PIB Per Capita: %.2f\n", PibPercapita2);
-
+    break;
+    
    
-    //Lógica do jogo 
+   case 2:
+   
+    printf("\nRegras do Jogo:\n");
+    printf("=========================================\n");
+    printf("O Super Trunfo de Países é um jogo de cartas onde o objetivo é comparar os valores das\n");
+    printf("informações de cada país e vencer as rodadas. Cada carta possui as seguintes informações:\n");
+    printf("- PIB (Produto Interno Bruto)\n");
+    printf("- População\n");
+    printf("- Área total\n");
+    printf("\nComo jogar:\n");
+    printf("1. Cada jogador escolhe uma carta de seu baralho.\n");
+    printf("2. O jogador que escolher a carta com o valor mais alto em uma das categorias (PIB, população ou área)\n");
+    printf("   vence a rodada e pega a carta do adversário.\n");
+    printf("3. O jogo continua até que todos as cartas sejam disputadas.\n");
+    printf("4. O jogador com mais cartas ao final é o vencedor!\n");
+    printf("\nBoa sorte e divirta-se!\n");
 
-    printf ("\n**** RESULTADO*****\n");
-
-   if (DensidadePopulacional1 > DensidadePopulacional2 && PibPercapita1 < PibPercapita2) {
-     printf("%s Ganhou\n", nome1);
-} else {
-    printf("%s Ganhou\n", nome2);
-}
+   break;
+   
+   case 3:
+   printf ("saindo... até logo!!\n");
+   break;
+   
+   default:
+   printf("Opcão indisponível\n");
+   
+   
+    }
+   
+  
     return 0;
 }
